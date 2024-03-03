@@ -35,8 +35,11 @@ public class ClientesResources {
 	}
 	
 	@GetMapping(params = "cpf")
-	public ResponseEntity<Cliente> buscaCliente(@RequestParam(name = "cpf") String cpf){
+	public ResponseEntity<?> buscaCliente(@RequestParam(name = "cpf") String cpf){
 		Optional<Cliente> cliente = service.getByCpf(cpf);
+		if(cliente.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
 		return ResponseEntity.ok(cliente.get());
 	}
 	
@@ -47,7 +50,7 @@ public class ClientesResources {
 		URI uri = ServletUriComponentsBuilder
 			.fromCurrentRequest()
 			.query("cpf={cpf}")
-			.buildAndExpand(cli.getId()).toUri();
+			.buildAndExpand(cli.getCpf()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 }
