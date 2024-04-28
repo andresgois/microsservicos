@@ -1,0 +1,18 @@
+meta {
+  name: Limit aprovado
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/avaliacoes-credito
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "cpf": "04588269956",
+    "renda": 5000
+  }
+}
