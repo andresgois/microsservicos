@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.github.andresgois.msgateway.application.exception.DadosClienteNotFoundException;
 import io.github.andresgois.msgateway.application.exception.ErroComunicacaoException;
+import io.github.andresgois.msgateway.application.exception.ErroSolicitacaoCartao;
 import io.github.andresgois.msgateway.application.representation.DadosAvaliacao;
+import io.github.andresgois.msgateway.application.representation.DadosSolicitacaoEmissaoCartao;
+import io.github.andresgois.msgateway.application.representation.ProtocoloSolicitacaoCartao;
 import io.github.andresgois.msgateway.application.representation.RetornoAvaliacaoCliente;
 import io.github.andresgois.msgateway.application.representation.SituacaoCliente;
 import lombok.RequiredArgsConstructor;
@@ -47,5 +50,16 @@ public class AvaliacoesCreditoController {
 		} catch (ErroComunicacaoException e2) {
 			return ResponseEntity.status(HttpStatus.resolve(e2.getStatus())).body(e2.getMessage());
 		}
+	}
+	
+	@PostMapping("solicitacoes-cartao")
+	public ResponseEntity<?> solicitarCartao(@RequestBody DadosSolicitacaoEmissaoCartao dados){
+		try {
+			ProtocoloSolicitacaoCartao retorno = avaliadorCreditoService
+					.solicitarEmissaoCartao(dados);
+			return ResponseEntity.ok(retorno);
+		} catch (ErroSolicitacaoCartao e) {
+			return ResponseEntity.internalServerError().body(e.getMessage());
+		} 
 	}
 }

@@ -1,0 +1,20 @@
+meta {
+  name: emit card
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/avaliacoes-credito/solicitacoes-cartao
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "cpf": "04588269956",
+    "idCartao": 1,
+    "endereco": "rua 15",
+    "limiteLiberado": 5000
+  }
+}

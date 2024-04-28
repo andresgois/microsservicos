@@ -2,6 +2,7 @@ package io.github.andresgois.msgateway.application;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
@@ -11,14 +12,18 @@ import org.springframework.stereotype.Service;
 import feign.FeignException.FeignClientException;
 import io.github.andresgois.msgateway.application.exception.DadosClienteNotFoundException;
 import io.github.andresgois.msgateway.application.exception.ErroComunicacaoException;
+import io.github.andresgois.msgateway.application.exception.ErroSolicitacaoCartao;
 import io.github.andresgois.msgateway.application.representation.Cartao;
 import io.github.andresgois.msgateway.application.representation.CartaoAprovado;
 import io.github.andresgois.msgateway.application.representation.CartaoCliente;
 import io.github.andresgois.msgateway.application.representation.DadosCliente;
+import io.github.andresgois.msgateway.application.representation.DadosSolicitacaoEmissaoCartao;
+import io.github.andresgois.msgateway.application.representation.ProtocoloSolicitacaoCartao;
 import io.github.andresgois.msgateway.application.representation.RetornoAvaliacaoCliente;
 import io.github.andresgois.msgateway.application.representation.SituacaoCliente;
 import io.github.andresgois.msgateway.infra.clients.CartaoResourceClient;
 import io.github.andresgois.msgateway.infra.clients.ClienteResourceClient;
+import io.github.andresgois.msgateway.infra.mqqueue.SolicitacaoEmissaoCartaoPublisher;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -27,6 +32,7 @@ public class AvaliadorCreditoService {
 	
 	private final ClienteResourceClient resourceClient;
 	private final CartaoResourceClient cartaoResourceClient;
+	private final SolicitacaoEmissaoCartaoPublisher cartaoPublisher;
 	
 	public SituacaoCliente obeterSituacaoCliente(String cpf) throws DadosClienteNotFoundException, ErroComunicacaoException {
 		// Obter dados do cliente - MSCLIENTE
@@ -80,5 +86,13 @@ public class AvaliadorCreditoService {
 		}
 	}
 	
-	
+	public ProtocoloSolicitacaoCartao solicitarEmissaoCartao(DadosSolicitacaoEmissaoCartao dados) {
+		try {
+			cartaoPublisher.solicitarCartao(dados);
+			String protocolo = UUID.randomUUID().toString();
+			return new ProtocoloSolicitacaoCartao(protocolo);
+		} catch (Exception e) {
+			throw new ErroSolicitacaoCartao(e.getMessage());
+		}
+	}
 }
