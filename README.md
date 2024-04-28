@@ -1,5 +1,10 @@
 # Microsserviços
 
+## Ordem de deploy das aplicações
+- eureka server
+- ms gateway
+- ms clientes
+
 ## Modelo
 
 ![Aplicação](./imgs/app.png)

@@ -1,0 +1,15 @@
+meta {
+  name: Find CPF
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:8080/clientes?cpf=04588269956
+  body: none
+  auth: none
+}
+
+query {
+  cpf: 04588269956
+}

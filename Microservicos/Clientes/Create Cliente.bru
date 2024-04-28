@@ -1,0 +1,23 @@
+meta {
+  name: Create Cliente
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/clientes?cpf=123
+  body: json
+  auth: none
+}
+
+query {
+  cpf: 123
+}
+
+body:json {
+  {
+    "cpf": "04588269956",
+    "nome": "andre1",
+    "idade": 36
+  }
+}

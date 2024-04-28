@@ -5,7 +5,7 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true
+          enabled: true #Localica os microserviços
           lower-case-service-id: true
     
 server:

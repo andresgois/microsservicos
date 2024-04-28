@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 @EnableEurekaClient
-@EnableDiscoveryClient
+@EnableDiscoveryClient // Ativa a descoberta de servidores
 public class MsgatewayApplication {
 
 	public static void main(String[] args) {
