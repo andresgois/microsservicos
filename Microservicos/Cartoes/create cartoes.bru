@@ -1,0 +1,20 @@
+meta {
+  name: create cartoes
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/cartoes
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nome": "teste",
+    "bandeira": "VISA",
+    "renda": 3000,
+    "limiteBasico": 3500
+  }
+}

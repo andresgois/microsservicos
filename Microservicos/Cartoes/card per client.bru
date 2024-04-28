@@ -1,0 +1,15 @@
+meta {
+  name: card per client
+  type: http
+  seq: 3
+}
+
+get {
+  url: http://localhost:8080/cartoes?cpf=04588269956
+  body: none
+  auth: none
+}
+
+query {
+  cpf: 04588269956
+}
