@@ -35,7 +35,7 @@ public class ClientesResources {
 	}
 	
 	@GetMapping(params = "cpf")
-	public ResponseEntity<?> buscaCliente(@RequestParam(name = "cpf") String cpf){
+	public ResponseEntity buscarPorCpf(@RequestParam("cpf") String cpf){
 		Optional<Cliente> cliente = service.getByCpf(cpf);
 		if(cliente.isEmpty()) {
 			return ResponseEntity.notFound().build();

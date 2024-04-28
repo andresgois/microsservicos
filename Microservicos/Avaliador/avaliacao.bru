@@ -1,0 +1,15 @@
+meta {
+  name: avaliacao
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8080/avaliacoes-credito/situacao-cliente?cpf=04588269956
+  body: none
+  auth: none
+}
+
+query {
+  cpf: 04588269956
+}
