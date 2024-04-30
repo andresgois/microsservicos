@@ -1,5 +1,9 @@
 package io.github.andresgois.msgateway.infra.mqueue;
 
+import java.util.Optional;
+
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
@@ -29,13 +33,17 @@ public class EmissaoCartaoSubcriber {
 			ObjectMapper mapper = new ObjectMapper();
 			DadosSolicitacaoEmissaoCartao dados = mapper
 					.readValue(payload, DadosSolicitacaoEmissaoCartao.class);
-			Cartao cartao = cartaoRepository.findById(dados.getIdCartao()).orElseThrow();
-			ClienteCartao clienteCartao = new ClienteCartao();
-			clienteCartao.setCartao(cartao);
-			clienteCartao.setCpf(dados.getCpf());
-			clienteCartao.setLimite(dados.getLimiteLiberado());
-			
-			clienteCartaoRepository.save(clienteCartao);
+			Optional<Cartao> card = cartaoRepository.findById(dados.getIdCartao());
+					//.orElseThrow( () -> new EntityNotFoundException("Card not found"));
+			if(card.isPresent()) {
+				Cartao cartao = card.get();
+				ClienteCartao clienteCartao = new ClienteCartao();
+				clienteCartao.setCartao(cartao);
+				clienteCartao.setCpf(dados.getCpf());
+				clienteCartao.setLimite(dados.getLimiteLiberado());
+				
+				clienteCartaoRepository.save(clienteCartao);
+			}
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
