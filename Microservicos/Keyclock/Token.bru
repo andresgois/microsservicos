@@ -1,0 +1,19 @@
+meta {
+  name: Token
+  type: http
+  seq: 1
+}
+
+get {
+  url: 
+  body: none
+  auth: oauth2
+}
+
+auth:oauth2 {
+  grant_type: client_credentials
+  access_token_url: http://localhost:8081/realms/mscursorealm/protocol/openid-connect/token
+  client_id: mscredito
+  client_secret: WCZLdxiJt4SCIPIKtL3xQUTj75198212
+  scope: 
+}
