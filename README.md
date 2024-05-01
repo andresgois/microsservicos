@@ -72,3 +72,35 @@ docker run --name mskeyclock -p 8081:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_AD
 - Tempo de expiração do token
   - Vá em Clients > Settings >  Advanced Settings 
     - Access Token Lifespan
+
+## Actuator
+- Dependência
+```
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+- Configuração no Application.yml
+  - Exibe todos os endpoint `configuravel`
+  - arquivo de logs
+```
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+logging:
+  file:
+    name: ./logs/log-file.log
+```
+- Ao clicar no microserviço no eureka server
+> http://laptop-4nij11i6:51891/actuator/info
+
+- Logs da aplicação
+```
+"logfile": {
+  "href": "http://laptop-4nij11i6:51891/actuator/logfile",
+  "templated": false
+}
+```

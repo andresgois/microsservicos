@@ -19,11 +19,13 @@ import io.github.andresgois.msclientes.application.representation.ClienteSaveReq
 import io.github.andresgois.msclientes.domain.Cliente;
 import io.github.andresgois.msclientes.infra.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 
 @RestController
 @RequestMapping("clientes")
 @RequiredArgsConstructor
+@Slf4j
 public class ClientesResources {
 	
 	private final ClienteService service;
@@ -31,6 +33,7 @@ public class ClientesResources {
 	// http://localhost:58766/clientes/path
 	@GetMapping("path")
 	public String getMethodName() {
+		log.info("Hello");
 		return "Hello MSCliente";
 	}
 	
