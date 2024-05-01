@@ -104,3 +104,8 @@ logging:
   "templated": false
 }
 ```
+
+## Spring Doc
+- https://springdoc.org/
+- Swagger da aplicação
+  - http://localhost:`port`/swagger-ui/index.html
