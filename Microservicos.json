@@ -1,0 +1,167 @@
+{
+  "info": {
+    "name": "Microservicos",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Avaliador",
+      "item": [
+        {
+          "name": "avaliacoes-credito",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "http://localhost:8080/avaliacoes-credito",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cpf\": \"04588269956\",\n  \"renda\": 5000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "situacao-cliente",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8080/avaliacoes-credito/situacao-cliente?cpf=04588269956"
+          }
+        },
+        {
+          "name": "Solicita Emissão Cartão",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "http://localhost:8080/avaliacoes-credito/solicitacoes-cartao",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cpf\": \"04588269956\",\n  \"idCartao\": 1,\n  \"endereco\": \"rua 15\",\n  \"limiteLiberado\": 5000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cartoes",
+      "item": [
+        {
+          "name": "card per client",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8080/cartoes?cpf=04588269956"
+          }
+        },
+        {
+          "name": "create cartoes",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "http://localhost:8080/cartoes",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"teste\",\n  \"bandeira\": \"VISA\",\n  \"renda\": 3000,\n  \"limiteBasico\": 3500\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Renda",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8080/cartoes?renda=5000"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Clientes",
+      "item": [
+        {
+          "name": "Create Cliente",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "http://localhost:8080/clientes?cpf=123",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cpf\": \"04588269956\",\n  \"nome\": \"andre1\",\n  \"idade\": 36\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Find CPF",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8080/clientes?cpf=04588269956"
+          }
+        },
+        {
+          "name": "Path",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8080/clientes/path",
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Keyclock",
+      "item": [
+        {
+          "name": "Token",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "bruno",
+      "event": []
+    }
+  ],
+  "variable": []
+}

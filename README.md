@@ -59,9 +59,7 @@ docker run --name mskeyclock -p 8081:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_AD
     - Save
   - Em Credentils terá um Secret
 - Após Adicionar a dependência do oauth2 resource server
-  - Vai no keyclock em:
-    - Realm Settings
-    - General
+  - Vai no keyclock em:  Realm Settings > General
       - Endpoint
       - Ao clicar no link abrir um arquivo json
         - URL para validar o token
@@ -71,3 +69,6 @@ docker run --name mskeyclock -p 8081:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_AD
       - ClientId é o nome do client Real: mscredito
       - Client Secret
         - Em Credentils terá um Secret
+- Tempo de expiração do token
+  - Vá em Clients > Settings >  Advanced Settings 
+    - Access Token Lifespan
