@@ -2,8 +2,6 @@ package io.github.andresgois.msgateway.infra.mqueue;
 
 import java.util.Optional;
 
-import javax.persistence.EntityNotFoundException;
-
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
@@ -17,9 +15,11 @@ import io.github.andresgois.msgateway.domain.DadosSolicitacaoEmissaoCartao;
 import io.github.andresgois.msgateway.infra.repository.CartaoRepository;
 import io.github.andresgois.msgateway.infra.repository.ClienteCartaoRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class EmissaoCartaoSubcriber {
 
 	private final CartaoRepository cartaoRepository;
@@ -45,7 +45,7 @@ public class EmissaoCartaoSubcriber {
 				clienteCartaoRepository.save(clienteCartao);
 			}
 		} catch (JsonProcessingException e) {
-			e.printStackTrace();
+			log.error("Erro ao receber emissão de solicitação de emissão de cartão {}", e.getMessage());
 		}
 	}
 }
