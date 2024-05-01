@@ -112,3 +112,4 @@
 2024-05-01 10:14:55.693  INFO 1928 --- [RMI TCP Connection(9)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2024-05-01 10:14:55.695  INFO 1928 --- [RMI TCP Connection(9)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
 2024-05-01 10:16:30.714  INFO 1928 --- [http-nio-auto-1-exec-7] i.g.a.m.application.ClientesResources    : Hello
+2024-05-01 10:19:53.833  INFO 1928 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
