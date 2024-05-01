@@ -22,6 +22,7 @@
 ```
 
 ## RabbitMQ
+- http://localhost:15672/
 ```
 docker run -it --name microservico-rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.9-management
 
@@ -109,3 +110,23 @@ logging:
 - https://springdoc.org/
 - Swagger da aplicação
   - http://localhost:`port`/swagger-ui/index.html
+
+
+## Maven
+- ./mvnw clean package -DskipTests
+- cd target
+- java -jar eurekaserver-0.0.1-SNAPSHOT.jar
+```
+FROM openjdk:17
+WORKDIR /app
+COPY ./target/eurekaserver-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 8761
+ENTRYPOINT java -jar app.jar
+```
+- docker build -t cursoms-eureka .
+- docker container run --name teste-eureka -p 8761:8761 cursoms-eureka
+
+## Build dentro do docker
+```
+
+```
