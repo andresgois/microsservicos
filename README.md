@@ -24,7 +24,7 @@
 ## RabbitMQ
 - http://localhost:15672/
 ```
-docker run -it --name microservico-rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.9-management
+docker run -it --name microservico-rabbitmq -p 5672:5672 -p 15672:15672 --network ms-curso rabbitmq:3.9-management
 
 usuário: guest
 senha: guest
@@ -123,8 +123,23 @@ COPY ./target/eurekaserver-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8761
 ENTRYPOINT java -jar app.jar
 ```
-- docker build -t cursoms-eureka .
-- docker container run --name teste-eureka -p 8761:8761 cursoms-eureka
+
+- docker build -t img-eureka-server .
+- docker container run --name eureka-server-container -p 8761:8761 -d --network ms-curso img-eureka-server
+  
+- docker build -t img-ms-cartoes .
+- docker container run --name ms-cartoes-container -d --network ms-curso -e RABBITMQ_SERVER=microservico-rabbitmq -e EUREKA_SERVER=eureka-server-container img-ms-cartoes
+
+- docker build -t img-ms-cliente .
+- docker container run --name ms-cliente-container -d --network ms-curso -e EUREKA_SERVER=eureka-server-container img-ms-cliente
+
+- docker build -t img-ms-avaliador .
+- docker container run --name ms-avaliador-container -d --network ms-curso -e RABBITMQ_SERVER=microservico-rabbitmq -e EUREKA_SERVER=eureka-server-container img-ms-avaliador
+
+- docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' eureka-server-container
+- docker network create ms-curso
+- docker network ls
+
 
 ## Build dentro do docker
 ```
