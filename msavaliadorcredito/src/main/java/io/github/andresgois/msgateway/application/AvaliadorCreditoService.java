@@ -25,9 +25,11 @@ import io.github.andresgois.msgateway.infra.clients.CartaoResourceClient;
 import io.github.andresgois.msgateway.infra.clients.ClienteResourceClient;
 import io.github.andresgois.msgateway.infra.mqqueue.SolicitacaoEmissaoCartaoPublisher;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AvaliadorCreditoService {
 	
 	private final ClienteResourceClient resourceClient;
@@ -37,6 +39,7 @@ public class AvaliadorCreditoService {
 	public SituacaoCliente obeterSituacaoCliente(String cpf) throws DadosClienteNotFoundException, ErroComunicacaoException {
 		// Obter dados do cliente - MSCLIENTE
 		try {
+			log.info("AvaliadorCreditoService");
 			ResponseEntity<DadosCliente> dadosCliente = resourceClient.dadosCliente(cpf);
 			// Obter cartoes do cliente - MSCARTOES
 			ResponseEntity<List<CartaoCliente>> cartoesResponse = cartaoResourceClient.getCartoesPorCliente(cpf);
@@ -48,6 +51,7 @@ public class AvaliadorCreditoService {
 					.build();
 		} catch (FeignClientException e) {
 			int status = e.status();
+			log.error("Message: {} ",e.getMessage());
 			if(HttpStatus.NOT_FOUND.value() == status) {
 				throw new DadosClienteNotFoundException();
 			}

@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import io.github.andresgois.msgateway.application.representation.DadosCliente;
 
 
-@FeignClient(value = "msclientes", url = "http://localhost:8080", path = "/clientes")
+@FeignClient(value = "msclientes", 
+	//url = "http://localhost:8080", 
+	path = "/clientes"
+	)
 public interface ClienteResourceClient {
 	
 	

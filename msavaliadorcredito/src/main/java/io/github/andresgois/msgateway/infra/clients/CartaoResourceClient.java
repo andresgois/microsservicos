@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import io.github.andresgois.msgateway.application.representation.Cartao;
 import io.github.andresgois.msgateway.application.representation.CartaoCliente;
 
-@FeignClient(value = "mscartoes", url = "http://localhost:8080", path = "/cartoes")
+@FeignClient(
+		value = "mscartoes", 
+		//url = "http://localhost:8080", 
+		path = "/cartoes"
+		)
 public interface CartaoResourceClient {
 
 	@GetMapping(params = "cpf")
