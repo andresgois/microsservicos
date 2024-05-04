@@ -33,7 +33,7 @@ senha: guest
 ## Keyclock
 
 ```
-docker run --name mskeyclock -p 8081:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:18.0.0 start-dev
+docker run --name mskeyclock -p 8081:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin --network ms-curso quay.io/keycloak/keycloak:18.0.0 start-dev
 ```
 
 - http://localhost:8081/
