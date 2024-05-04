@@ -18,13 +18,21 @@ import io.github.andresgois.msgateway.application.representation.ProtocoloSolici
 import io.github.andresgois.msgateway.application.representation.RetornoAvaliacaoCliente;
 import io.github.andresgois.msgateway.application.representation.SituacaoCliente;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("avaliacoes-credito")
 @RequiredArgsConstructor
+@Slf4j
 public class AvaliacoesCreditoController {
 
 	private final AvaliadorCreditoService avaliadorCreditoService;
+	
+	@GetMapping("path")
+	public String getMethodName() {
+		log.info("Hello");
+		return "Hello AvaliacoesCreditoController";
+	}
 
 	@GetMapping(value = "situacao-cliente", params = "cpf")
 	public ResponseEntity consultaSituacaoCliente(@RequestParam("cpf") String cpf) {

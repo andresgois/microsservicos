@@ -128,13 +128,16 @@ ENTRYPOINT java -jar app.jar
 - docker container run --name eureka-server-container -p 8761:8761 -d --network ms-curso img-eureka-server
   
 - docker build -t img-ms-cartoes .
-- docker container run --name ms-cartoes-container -d --network ms-curso -e RABBITMQ_SERVER=microservico-rabbitmq -e EUREKA_SERVER=eureka-server-container img-ms-cartoes
+- docker container run --name ms-cartoes-container -d --network ms-curso -P -e RABBITMQ_SERVER=microservico-rabbitmq -e EUREKA_SERVER=eureka-server-container img-ms-cartoes
 
 - docker build -t img-ms-cliente .
-- docker container run --name ms-cliente-container -d --network ms-curso -e EUREKA_SERVER=eureka-server-container img-ms-cliente
+- docker container run --name ms-cliente-container -d --network ms-curso -P -e EUREKA_SERVER=eureka-server-container img-ms-cliente
 
 - docker build -t img-ms-avaliador .
-- docker container run --name ms-avaliador-container -d --network ms-curso -e RABBITMQ_SERVER=microservico-rabbitmq -e EUREKA_SERVER=eureka-server-container img-ms-avaliador
+- docker container run --name ms-avaliador-container -d --network ms-curso -P -e RABBITMQ_SERVER=microservico-rabbitmq -e EUREKA_SERVER=eureka-server-container img-ms-avaliador
+
+- docker build -t img-gateway .
+- docker container run --name gateway-container -d --network ms-curso -p 8080:8080 -e RABBITMQ_SERVER=microservico-rabbitmq -e EUREKA_SERVER=eureka-server-container -e KEYCLOAK_SERVER=mskeyclock -e KEYCLOAK_PORT=8080 img-gateway
 
 - docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' eureka-server-container
 - docker network create ms-curso

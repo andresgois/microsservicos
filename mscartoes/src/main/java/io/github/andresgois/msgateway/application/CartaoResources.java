@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,10 +17,12 @@ import io.github.andresgois.msgateway.application.representation.CartoesPorClien
 import io.github.andresgois.msgateway.domain.Cartao;
 import io.github.andresgois.msgateway.domain.ClienteCartao;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("cartoes")
 @RequiredArgsConstructor
+@Slf4j
 public class CartaoResources {
 
 	private final CartaoService cartaoService;
@@ -42,6 +43,7 @@ public class CartaoResources {
 	
 	@GetMapping(params = "cpf")
 	public ResponseEntity<List<CartoesPorClienteResponse>> getCartaoesRendaAteh(@RequestParam("cpf") String cpf){
+		log.info("CPF: {}", cpf);
 		 List<ClienteCartao> list = clienteCartaoService.listCartoesByCpf(cpf);
 		 List<CartoesPorClienteResponse> resultList = list.stream()
 		 	.map(CartoesPorClienteResponse::fromModel)
